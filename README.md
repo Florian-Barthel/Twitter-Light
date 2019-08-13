@@ -24,7 +24,7 @@
 <ul>
   <li>Run Tests:<code> $ npm test</code></li>
   <li>Run Program (local):<code> $ node app.js</code></li>
-  <li>Build Program (docker):<code> $ docker build -t fubei/twitter-light .</code><li>
+  <li>Build Program (docker):<code> $ docker build -t fubei/twitter-light .</code></li>
   <li>Run Program (docker):<code> $ docker run -p 8888:8888 -d fubei/twitter-light</code></li>
   <li>Show running docker:<code> $ docker ps -a</code></li>
   <li>Connect to telnet:<code> $ telnet localhost 8888</code></li>
