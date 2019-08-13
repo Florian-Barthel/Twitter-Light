@@ -1,43 +1,37 @@
 [
   {
-    "name": "benni",
-    "following": [
-      "tom"
-    ],
-    "posts": [
-      {
-        "content": "hallo (benni)",
-        "time": 1565731916
-      },
-      {
-        "content": "hallo (benni)",
-        "time": 1565731923
-      },
-      {
-        "content": "hallo (benni)",
-        "time": 1565732751
-      },
-      {
-        "content": "test",
-        "time": 1565736179
-      },
-      {
-        "content": "qwer",
-        "time": 1565737143
-      },
-      {
-        "content": "aHJL",
-        "time": 1565737181
-      }
-    ]
-  },
-  {
     "name": "tom",
     "following": [],
     "posts": [
       {
         "content": "hallo",
         "time": 1565737367
+      }
+    ]
+  },
+  {
+    "name": "florian",
+    "following": [],
+    "posts": [
+      {
+        "content": "hallo",
+        "time": 1565738744
+      }
+    ]
+  },
+  {
+    "name": "Benni",
+    "following": [
+      "florian"
+    ],
+    "posts": [
+      {
+        "content": "hello",
+        "time": 1565739285
+      },
+      {
+        "content": "world",
+        "time": 1565739359
       }
     ]
   }

@@ -70,10 +70,11 @@ const wall = (name) => {
     })
 
     //print all posts in the correct order
-    var result = 'Timeline from ' + name + ':\n'
+    var result = '\nTimeline from ' + name + ':\n'
     allPosts.forEach((post) => {
         result += post.author +': ' + post.content + calcTimeDifference(post.time) + '\n'
     });
+    result += '\n'
     return result
 }
 
