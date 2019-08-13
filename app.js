@@ -1,6 +1,8 @@
 const users = require('./src/users')
 const net = require('net')
 const actions = require('./src/actions')
+const chalk = require('chalk')
+
 
 /**
 * Cleans the input of carriage return, newline
@@ -8,7 +10,10 @@ const actions = require('./src/actions')
 function cleanInput(data) {
     return data.toString().replace(/(\r\n|\n|\r)/gm,'')
 }
-
+//TODO
+//disable names like help or exit
+//let user post more than one word
+//reduce code in main
 const receiveData = (socket, data) => {
     var cleanData = cleanInput(data);
     const tokens = cleanData.split(' ')
@@ -17,13 +22,7 @@ const receiveData = (socket, data) => {
         if (tokens[0] === 'exit') {
             socket.end('Closing connection\n')
         } else if (tokens[0] === 'help') {
-            socket.write('create user: create (user)\n')
-            socket.write('delete user: delete (user)\n')
-            socket.write('posting: (user) post (message)\n')
-            socket.write('reading: (user)\n')
-            socket.write('following: (user) follows (another user)\n')
-            socket.write('wall: (user) wall\n')
-            socket.write('exit: exit\n')
+            printHelp(socket)
         } else {
             socket.write(actions.read(tokens[0]))
         }
@@ -35,7 +34,7 @@ const receiveData = (socket, data) => {
         } else if (tokens[0] === 'delete') {
             socket.write(users.removeUser(tokens[1]))
         } else {
-            socket.write('unrecognized command')
+            socket.write('unrecognized command\n')
         }
     } else if (tokenCount == 3) {
         if (tokens[1] === 'post') {
@@ -43,10 +42,10 @@ const receiveData = (socket, data) => {
         } else if (tokens[1] == 'follows') {
             socket.write(actions.follow(tokens[0], tokens[2]))
         } else {
-            socket.write('unrecognized command')
+            socket.write('unrecognized command\n')
         }
     } else {
-        socket.write('unrecognized command')
+        socket.write('unrecognized command\n')
     }
 }
 
@@ -55,7 +54,7 @@ const receiveData = (socket, data) => {
  * @param {socket} socket 
  */
 const newSocket = (socket) => {
-    socket.write('Welcome to Twitter-Light\n')
+    socket.write(chalk.green('Welcome to Twitter-Light\n'))
     socket.write('Type help for a list of commands\n')
     socket.on('data', (data) => {
         receiveData(socket, data)
@@ -63,6 +62,15 @@ const newSocket = (socket) => {
 
 }
 
+const printHelp = (socket) => {
+    socket.write(chalk.blue('create user:') + ' create (user)\n')
+    socket.write(chalk.blue('delete user:') +' delete (user)\n')
+    socket.write(chalk.blue('posting: (user)') + ' post (message)\n')
+    socket.write(chalk.blue('reading:') + ' (user)\n')
+    socket.write(chalk.blue('following:') + ' (user) follows (another user)\n')
+    socket.write(chalk.blue('wall:') + ' (user) wall\n')
+    socket.write(chalk.blue('exit:') + ' exit\n')
+}
 
 var server = net.createServer(newSocket);
 
