@@ -36,46 +36,45 @@ const wall = (name) => {
     //get all own posts from user (name)
     const allUsers = users.loadUsers()
     const user = allUsers.find((user) => user.name === name)
-    if (user) {
-        user.posts.forEach((post) => {
+    if (!user) {
+        return errormessages.userNotFound(name)
+    }
+    user.posts.forEach((post) => {
+        //push all posts with additional author attribute
+        allPosts.push({
+            author: name,
+            content: post.content,
+            time: post.time
+        })
+    })
+
+    //get all users that the user (name) has subscribed
+    const allFollowingUsers = user.following
+    allFollowingUsers.forEach((followingUserName) => {
+        //get the subscribed user by name
+        followingUser = allUsers.find((findFollowingUser) => findFollowingUser.name === followingUserName)
+        //get all posts from subscribed users
+        followingUser.posts.forEach((post) => {
             //push all posts with additional author attribute
             allPosts.push({
-                author: name,
+                author: followingUserName,
                 content: post.content,
                 time: post.time
             })
         })
-    
-        //get all users that the user (name) has subscribed
-        const allFollowingUsers = user.following
-        allFollowingUsers.forEach((followingUserName) => {
-            //get the subscribed user by name
-            followingUser = allUsers.find((findFollowingUser) => findFollowingUser.name === followingUserName)
-            //get all posts from subscribed users
-            followingUser.posts.forEach((post) => {
-                //push all posts with additional author attribute
-                allPosts.push({
-                    author: followingUserName,
-                    content: post.content,
-                    time: post.time
-                })
-            })
-        })
-    
-        //sort all posts by time
-        allPosts.sort((a, b) => {
-            return b.time - a.time
-        })
-    
-        //print all posts in the correct order
-        var result = 'Timeline from ' + name + ':\n'
-        allPosts.forEach((post) => {
-            result += post.author +': ' + post.content + calcTimeDifference(post.time) + '\n'
-        });
-        return result
-    } else {
-        return errormessages.userNotFound(name)
-    }
+    })
+
+    //sort all posts by time
+    allPosts.sort((a, b) => {
+        return b.time - a.time
+    })
+
+    //print all posts in the correct order
+    var result = 'Timeline from ' + name + ':\n'
+    allPosts.forEach((post) => {
+        result += post.author +': ' + post.content + calcTimeDifference(post.time) + '\n'
+    });
+    return result
 }
 
 
