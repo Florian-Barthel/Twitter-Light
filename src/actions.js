@@ -39,6 +39,7 @@ const wall = (name) => {
     if (!user) {
         return errormessages.userNotFound(name)
     }
+
     user.posts.forEach((post) => {
         //push all posts with additional author attribute
         allPosts.push({
@@ -49,8 +50,7 @@ const wall = (name) => {
     })
 
     //get all users that the user (name) has subscribed
-    const allFollowingUsers = user.following
-    allFollowingUsers.forEach((followingUserName) => {
+    user.following.forEach((followingUserName) => {
         //get the subscribed user by name
         followingUser = allUsers.find((findFollowingUser) => findFollowingUser.name === followingUserName)
         //get all posts from subscribed users
