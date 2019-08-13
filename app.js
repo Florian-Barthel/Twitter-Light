@@ -1,9 +1,3 @@
-const net = require('net')
+const server = require('./server/server')
 
-const newSocket = (socket) => {
-    socket.write('test telnet server')
-}
-
-var server = net.createServer(newSocket);
-
-server.listen(8888)
+server.setup()
