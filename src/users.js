@@ -12,7 +12,7 @@ const addUser = (name) => {
     const duplicateUsers = users.find((user) => user.name === name)
 
     if (duplicateUsers) {
-        return 'This username is already taken.'
+        return 'This username is already taken.\n'
     } else {
         //create a new user with the given username
         users.push({
@@ -21,7 +21,7 @@ const addUser = (name) => {
             posts: []
         })
         saveUsers(users)
-        return 'User ' + name + ' was created.'
+        return 'User ' + name + ' was created.\n'
     }
 }
 
@@ -46,7 +46,7 @@ const removeUser = (name) => {
         return errormessages.userNotFound(name)
     } else {
         saveUsers(filteredUsers)
-        return 'User ' + name + ' was removed.'
+        return 'User ' + name + ' was removed.\n'
     }
 }
 

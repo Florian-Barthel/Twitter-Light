@@ -13,16 +13,16 @@ const post = (name, content) => {
 
     const user = allUsers.find((user) => user.name === name)
 
-    if (user) {
-        user.posts.push({
-            content,
-            time: Math.floor(Date.now() / 1000)
-        })
-        users.saveUsers(allUsers)
-        return name + ' has succesfully pushed to timeline.'
-    } else {
+    if (!user) {
         return errormessages.userNotFound(name)
     }
+    user.posts.push({
+        content,
+        time: Math.floor(Date.now() / 1000)
+    })
+    users.saveUsers(allUsers)
+    return name + ' has succesfully pushed to timeline.\n'
+    
 }
 
 
@@ -95,11 +95,11 @@ const follow = (name, nameSubscribeTo) => {
     } else if (!userToFollow) {
         return errormessages.userNotFound(nameSubscribeTo)
     } else if (userAlreadyFollowing) {
-        return name + ' is already subscribed to ' + nameSubscribeTo
+        return name + ' is already subscribed to ' + nameSubscribeTo + '\n'
     } else {
         user.following.push(nameSubscribeTo)
         users.saveUsers(allUsers)
-        return name + ' in now following ' + nameSubscribeTo + '.'
+        return name + ' is now following ' + nameSubscribeTo + '.\n'
     }
 }
 
@@ -110,18 +110,21 @@ const follow = (name, nameSubscribeTo) => {
  */
 const read = (name) => {
     const allUsers = users.loadUsers()
-
     const user = allUsers.find((user) => user.name === name)
 
-    if (user) {
-        var result = 'All posts from ' + name + ':\n'
-        user.posts.forEach((post) => {
-            result += name +': ' + post.content + calcTimeDifference(post.time) + '\n'
-        });
-        return result
-    } else {
+    if (!user) { 
         return errormessages.userNotFound(name)
     }
+
+    var posts = user.posts
+    posts.sort((a, b) => {
+        return b.time - a.time
+    })
+    var result = 'All posts from ' + name + ':\n'
+    posts.forEach((post) => {
+        result += name +': ' + post.content + calcTimeDifference(post.time) + '\n'
+    });
+    return result
 }
 
 
