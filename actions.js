@@ -31,7 +31,11 @@ const post = (name, content) => {
  * @param {string} name 
  */
 const wall = (name) => {
-
+    //TODO:
+    //get all posts from user (name)
+    //get all posts from following users
+    //sort all posts by time
+    //print all posts in the correct order
 }
 
 
