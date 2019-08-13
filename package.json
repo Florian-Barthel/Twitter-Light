@@ -5,7 +5,8 @@
   "author": "Florian Barthel <florianbarthel@yahoo.de>",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "jest"
   },
   "dependencies": {},
   "repository": {
@@ -16,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Florian-Barthel/Twitter-Light/issues"
   },
-  "homepage": "https://github.com/Florian-Barthel/Twitter-Light#readme"
+  "homepage": "https://github.com/Florian-Barthel/Twitter-Light#readme",
+  "devDependencies": {
+    "jest": "^24.8.0"
+  }
 }

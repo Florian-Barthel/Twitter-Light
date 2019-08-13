@@ -1,3 +1,11 @@
-const server = require('./server/server')
-
+const server = require('./src/server')
+const users = require('./src/users')
+const actions = require('./src/actions')
 server.setup()
+
+// console.log(users.addUser('florian'))
+// console.log(users.addUser('benni'))
+// console.log(actions.post('florian', 'hallo'))
+// console.log(actions.follow('benni', 'florian'))
+// console.log(actions.read('florian'))
+//console.log(users.removeUser('florian'))
