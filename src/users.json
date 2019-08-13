@@ -1,1 +1,1 @@
-[]
+[{"name":"florian","following":[],"posts":[{"content":"hallo (florian)","time":1565727331},{"content":"hallo (florian)","time":1565727343},{"content":"hallo (florian)","time":1565727387}]},{"name":"benni","following":["florian"],"posts":[{"content":"hallo (benni)","time":1565727331},{"content":"hallo (benni)","time":1565727343},{"content":"hallo (benni)","time":1565727387}]}]
