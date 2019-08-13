@@ -34,7 +34,8 @@ const setup = () => {
      */
     const newSocket = (socket) => {
         clients.push(socket)
-        socket.write('Welcome to Twitter-Light (address: ' + socket.remoteAddress + ":" + socket.remotePort + ')')
+        socket.write('Welcome to Twitter-Light')
+        socket.write('Type help for commands')
         socket.on('data', (data) => {
             receiveData(socket, data)
         })
@@ -48,7 +49,7 @@ const setup = () => {
         //index == -1 when element is not in array
         if (index != -1) {
             //removes the element
-            clients.splice(i, 1)
+            clients.splice(index, 1)
         }
     }
     
