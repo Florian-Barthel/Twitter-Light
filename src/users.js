@@ -56,7 +56,7 @@ const removeUser = (name) => {
  * @param {list} users 
  */
 const saveUsers = (users) => {
-    const dataJSON = JSON.stringify(users)
+    const dataJSON = JSON.stringify(users, undefined, 2)
     fs.writeFileSync('./src/users.json', dataJSON)
 }
 
