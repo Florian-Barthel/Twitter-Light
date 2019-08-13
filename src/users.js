@@ -57,7 +57,7 @@ const removeUser = (name) => {
  */
 const saveUsers = (users) => {
     const dataJSON = JSON.stringify(users)
-    fs.writeFileSync('users.json', dataJSON)
+    fs.writeFileSync('./src/users.json', dataJSON)
 }
 
 
@@ -66,7 +66,7 @@ const saveUsers = (users) => {
  */
 const loadUsers = () => {
     try {
-        const dataBuffer = fs.readFileSync('users.json')
+        const dataBuffer = fs.readFileSync('./src/users.json')
         const dataJSON = dataBuffer.toString()
         return JSON.parse(dataJSON)
     } catch (e) {
@@ -75,9 +75,15 @@ const loadUsers = () => {
 }
 
 
+const removeAll = () => {
+    saveUsers([])
+}
+
+
 module.exports = {
     addUser,
     removeUser,
     saveUsers,
-    loadUsers
+    loadUsers,
+    removeAll
 }

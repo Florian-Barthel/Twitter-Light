@@ -1,6 +1,6 @@
-const server = require('./server')
-const users = require('./users')
-const actions = require('./actions')
+const server = require('./src/server')
+const users = require('./src/users')
+const actions = require('./src/actions')
 server.setup()
 
 // console.log(users.addUser('florian'))
