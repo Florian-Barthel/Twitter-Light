@@ -30,7 +30,7 @@ const setup = () => {
 
     /**
      * Function called when a new user connects
-     * @param socket 
+     * @param {socket} socket 
      */
     const newSocket = (socket) => {
         clients.push(socket)
