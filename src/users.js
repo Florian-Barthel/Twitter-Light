@@ -12,8 +12,8 @@ const addUser = (name) => {
 
     if (getUserByName(name)) {
         return 'This username is already taken.\n'
-    } else if (name === 'help' || name === 'exit') {
-        return 'The names help / exit are not allowed.\n'
+    } else if (name === 'help' || name === 'exit' || name === 'list') {
+        return 'The names help / exit / list are not allowed.\n'
     } else {
         //create a new user with the given username
         users.push({
