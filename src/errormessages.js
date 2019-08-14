@@ -1,5 +1,7 @@
+const chalk = require('chalk')
+
 const userNotFound = (name) => {
-    return 'User ' + name + ' was not found.\n'
+    return 'User ' + chalk.red(name) + ' was not found.\n'
 }
 
 module.exports = {

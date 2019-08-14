@@ -10,8 +10,7 @@ const errormessages = require('./errormessages')
  */
 const post = (name, content) => {
     const allUsers = users.loadUsers()
-
-    const user = allUsers.find((user) => user.name === name)
+    const user = allUsers.find((user) => user.name.toLowerCase() === name.toLowerCase() )
 
     if (!user) {
         return errormessages.userNotFound(name)
@@ -20,9 +19,9 @@ const post = (name, content) => {
         content,
         time: Math.floor(Date.now() / 1000)
     })
+
     users.saveUsers(allUsers)
-    return name + ' has succesfully pushed to timeline.\n'
-    
+    return user.name + ' has succesfully pushed to timeline.\n'
 }
 
 
@@ -32,18 +31,17 @@ const post = (name, content) => {
  */
 const wall = (name) => {
     var allPosts = []
-
-    //get all own posts from user (name)
-    const allUsers = users.loadUsers()
-    const user = allUsers.find((user) => user.name === name)
+    
+    const user = users.getUserByName(name)
     if (!user) {
         return errormessages.userNotFound(name)
     }
-
+    
+    //get all own posts from user (name)
     user.posts.forEach((post) => {
         //push all posts with additional author attribute
         allPosts.push({
-            author: name,
+            author: user.name,
             content: post.content,
             time: post.time
         })
@@ -51,9 +49,7 @@ const wall = (name) => {
 
     //get all users that the user (name) has subscribed
     user.following.forEach((followingUserName) => {
-        //get the subscribed user by name
-        followingUser = allUsers.find((findFollowingUser) => findFollowingUser.name === followingUserName)
-        //get all posts from subscribed users
+        followingUser = users.getUserByName(followingUserName)
         followingUser.posts.forEach((post) => {
             //push all posts with additional author attribute
             allPosts.push({
@@ -70,7 +66,7 @@ const wall = (name) => {
     })
 
     //print all posts in the correct order
-    var result = '\nTimeline from ' + name + ':\n'
+    var result = '\nTimeline from ' + user.name + ':\n'
     allPosts.forEach((post) => {
         result += post.author +': ' + post.content + calcTimeDifference(post.time) + '\n'
     });
@@ -86,21 +82,20 @@ const wall = (name) => {
  */
 const follow = (name, nameSubscribeTo) => {
     const allUsers = users.loadUsers()
-
-    const user = allUsers.find((user) => user.name === name)
-    const userToFollow = allUsers.find((user) => user.name === nameSubscribeTo)
-    const userAlreadyFollowing = user.following.find((followingName) => followingName === nameSubscribeTo)
+    const user = allUsers.find((user) => user.name.toLocaleLowerCase() === name.toLocaleLowerCase())
+    const userToFollow = allUsers.find((user) => user.name.toLocaleLowerCase() === nameSubscribeTo.toLocaleLowerCase())
+    const userAlreadyFollowing = user.following.find((followingName) => followingName.toLocaleLowerCase() === nameSubscribeTo.toLocaleLowerCase())
 
     if (!user) {
         return errormessages.userNotFound(name)
     } else if (!userToFollow) {
         return errormessages.userNotFound(nameSubscribeTo)
     } else if (userAlreadyFollowing) {
-        return name + ' is already subscribed to ' + nameSubscribeTo + '\n'
+        return user.name + ' is already subscribed to ' + userToFollow.name + '\n'
     } else {
-        user.following.push(nameSubscribeTo)
+        user.following.push(userToFollow.name)
         users.saveUsers(allUsers)
-        return name + ' is now following ' + nameSubscribeTo + '.\n'
+        return user.name + ' is now following ' + userToFollow.name + '.\n'
     }
 }
 
@@ -110,20 +105,20 @@ const follow = (name, nameSubscribeTo) => {
  * @param {string} name 
  */
 const read = (name) => {
-    const allUsers = users.loadUsers()
-    const user = allUsers.find((user) => user.name === name)
+    const user = users.getUserByName(name)
 
     if (!user) { 
         return errormessages.userNotFound(name)
     }
-
+    
     var posts = user.posts
+    //Sort post by time decreasing
     posts.sort((a, b) => {
         return b.time - a.time
     })
-    var result = 'All posts from ' + name + ':\n'
+    var result = 'All posts from ' + user.name + ':\n'
     posts.forEach((post) => {
-        result += name +': ' + post.content + calcTimeDifference(post.time) + '\n'
+        result += user.name +': ' + post.content + calcTimeDifference(post.time) + '\n'
     });
     return result
 }
@@ -145,7 +140,6 @@ const calcTimeDifference = (time) => {
         difference = Math.floor(difference / 60)
         return ' (' + difference + ' min ago)'
     } else {
-
         return ' (' + difference + ' sec ago)'
     }
 }
