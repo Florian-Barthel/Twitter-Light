@@ -37,7 +37,7 @@ const receiveData = (socket, data) => {
             socket.write('unrecognized command\n')
         }
     } else if (tokenCount == 3) {
-        if (tokens[1] === 'post') {
+        if (tokens[1] === '->') {
             socket.write(actions.post(tokens[0], tokens[2]))
         } else if (tokens[1] == 'follows') {
             socket.write(actions.follow(tokens[0], tokens[2]))
@@ -65,7 +65,7 @@ const newSocket = (socket) => {
 const printHelp = (socket) => {
     socket.write(chalk.blue('create user:') + ' create (user)\n')
     socket.write(chalk.blue('delete user:') +' delete (user)\n')
-    socket.write(chalk.blue('posting: (user)') + ' post (message)\n')
+    socket.write(chalk.blue('posting:') + '(user) -> (message)\n')
     socket.write(chalk.blue('reading:') + ' (user)\n')
     socket.write(chalk.blue('following:') + ' (user) follows (another user)\n')
     socket.write(chalk.blue('wall:') + ' (user) wall\n')

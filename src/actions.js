@@ -135,7 +135,10 @@ const read = (name) => {
  */
 const calcTimeDifference = (time) => {
     var difference = Math.floor(Date.now() / 1000) - time
-    if (difference >= (60 * 60)) {
+    if (difference >= (60 * 60 * 24)) {
+        difference = Math.floor(difference / (60 * 60 * 24))
+        return ' (' + difference + ' d ago)'
+    }else if (difference >= (60 * 60)) {
         difference = Math.floor(difference / (60 * 60))
         return ' (' + difference + ' h ago)'
     } else if (difference >= (60)) {
