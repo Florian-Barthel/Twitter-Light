@@ -68,7 +68,7 @@ const wall = (name) => {
     //print all posts in the correct order
     var result = '\nTimeline from ' + user.name + ':\n'
     allPosts.forEach((post) => {
-        result += post.author +': ' + post.content + calcTimeDifference(post.time) + '\n'
+        result += post.author +' - ' + post.content + calcTimeDifference(post.time) + '\n'
     });
     result += '\n'
     return result
@@ -118,7 +118,7 @@ const read = (name) => {
     })
     var result = 'All posts from ' + user.name + ':\n'
     posts.forEach((post) => {
-        result += user.name +': ' + post.content + calcTimeDifference(post.time) + '\n'
+        result += user.name +' - ' + post.content + calcTimeDifference(post.time) + '\n'
     });
     return result
 }
