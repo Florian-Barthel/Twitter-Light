@@ -1,24 +1,12 @@
 [
   {
-    "name": "florian",
-    "following": [],
-    "posts": [
-      {
-        "content": "ad sadf ",
-        "time": 1565782692
-      }
-    ]
-  },
-  {
-    "name": "Benni",
+    "name": "user",
     "following": [],
     "posts": []
   },
   {
-    "name": "TOM",
-    "following": [
-      "florian"
-    ],
+    "name": "a",
+    "following": [],
     "posts": []
   }
 ]

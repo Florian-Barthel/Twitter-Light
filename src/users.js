@@ -9,7 +9,6 @@ const errormessages = require('./errormessages')
  */
 const addUser = (name) => {
     const users = loadUsers()
-
     if (getUserByName(name)) {
         return 'This username is already taken.\n'
     } else if (name === 'help' || name === 'exit' || name === 'list') {
@@ -42,7 +41,6 @@ const removeUser = (name) => {
         user.following = user.following.filter((followingName) => followingName.toLowerCase() !== name.toLowerCase())
     })
 
-    
     if (users.length == filteredUsers.length) {
         return errormessages.userNotFound(name)
     } else {
