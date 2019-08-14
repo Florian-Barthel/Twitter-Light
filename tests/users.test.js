@@ -21,16 +21,14 @@ afterAll(() => {
 
 test('Create user and save to json file', () => {
     users.addUser('new user')
-    const currentUsers = users.loadUsers()
-    const myUser = currentUsers.find((user) => user.name === 'new user')
-    expect(myUser).toBeDefined()
+    expect(users.getUserByName('new user')).toBeDefined()
 })
 
 
 test('Create already existing user and expect it not to save', () => {
     users.addUser(userDuplicate)
     const currentUsers = users.loadUsers()
-    const filteredUsers = currentUsers.filter((user) => user.name === 'new user')
+    const filteredUsers = currentUsers.filter((user) => user.name === userDuplicate)
     expect(filteredUsers.length).toBe(1)
 })
 
@@ -39,7 +37,7 @@ test('Delete user', () => {
     const lenghtBefore = users.loadUsers().length
     users.removeUser(userDelete)
     const lenghtAfter = users.loadUsers().length
-    expect(lenghtBefore).toBe(lenghtAfter + 1)
+    expect(lenghtAfter).toBe(lenghtBefore - 1)
 })
 
 
@@ -48,4 +46,10 @@ test('Delete user that not exists', () => {
     users.removeUser('user not created yet')
     const lenghtAfter = users.loadUsers().length
     expect(lenghtBefore).toBe(lenghtAfter)
+})
+
+
+test('Create casesensitive user and find it without casesensitive', () => {
+    users.addUser('MyUser')
+    expect(users.getUserByName('myuser')).toBeDefined()
 })
