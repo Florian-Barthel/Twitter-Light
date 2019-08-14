@@ -23,6 +23,8 @@ const receiveData = (socket, data) => {
             socket.end('Closing connection\n')
         } else if (tokens[0] === 'help') {
             printHelp(socket)
+        } else if (tokens[0] === 'list') {
+            socket.write(users.listAllUsers())
         } else {
             socket.write(actions.read(tokens[0]))
         }
@@ -63,13 +65,14 @@ const newSocket = (socket) => {
 }
 
 const printHelp = (socket) => {
-    socket.write(chalk.blue('create user:') + ' create (user)\n')
-    socket.write(chalk.blue('delete user:') +' delete (user)\n')
-    socket.write(chalk.blue('posting:') + '(user) -> (message)\n')
-    socket.write(chalk.blue('reading:') + ' (user)\n')
-    socket.write(chalk.blue('following:') + ' (user) follows (another user)\n')
-    socket.write(chalk.blue('wall:') + ' (user) wall\n')
-    socket.write(chalk.blue('exit:') + ' exit\n')
+    socket.write(chalk.blue('list all users:') + '\tlist\n')
+    socket.write(chalk.blue('create user:') + '\tcreate (user)\n')
+    socket.write(chalk.blue('delete user:') +'\tdelete (user)\n')
+    socket.write(chalk.blue('posting:') + '\t(user) -> (message)\n')
+    socket.write(chalk.blue('reading:') + '\t(user)\n')
+    socket.write(chalk.blue('following:') + '\t(user) follows (another user)\n')
+    socket.write(chalk.blue('wall:') + '\t\t(user) wall\n')
+    socket.write(chalk.blue('exit:') + '\t\texit\n')
 }
 
 var server = net.createServer(newSocket);

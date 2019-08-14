@@ -9,10 +9,11 @@ const errormessages = require('./errormessages')
  */
 const addUser = (name) => {
     const users = loadUsers()
-    const duplicateUsers = users.find((user) => user.name === name)
 
-    if (duplicateUsers) {
+    if (getUserByName(name)) {
         return 'This username is already taken.\n'
+    } else if (name === 'help' || name === 'exit') {
+        return 'The names help / exit are not allowed.\n'
     } else {
         //create a new user with the given username
         users.push({
@@ -34,11 +35,11 @@ const removeUser = (name) => {
     const users = loadUsers()
 
     //removes the user from the array
-    const filteredUsers = users.filter((user) => user.name !== name)
+    const filteredUsers = users.filter((user) => user.name.toLowerCase() !== name.toLowerCase())
 
     //removes the user from every follower array
     filteredUsers.forEach((user) => {
-        user.following = user.following.filter((followingName) => followingName !== name)
+        user.following = user.following.filter((followingName) => followingName.toLowerCase() !== name.toLowerCase())
     })
 
     
@@ -75,8 +76,36 @@ const loadUsers = () => {
 }
 
 
+/**
+ * Removes all users from json file
+ */
 const removeAll = () => {
     saveUsers([])
+}
+
+
+/**
+ * Returns the User Object or undefined
+ * @param {String} name 
+ */
+const getUserByName = (name) => {
+    const currentUsers = loadUsers()
+    const myUser = currentUsers.find((user) => user.name.toLowerCase() === name.toLowerCase())
+    return myUser
+}
+
+
+const listAllUsers = () => {
+    const currentUsers = loadUsers()
+    if (!currentUsers) {
+        return 'No users were created yet'
+    }
+
+    var result = 'List of all users:\n'
+    currentUsers.forEach((user) => {
+        result += user.name + '\n'
+    })
+    return result
 }
 
 
@@ -85,5 +114,7 @@ module.exports = {
     removeUser,
     saveUsers,
     loadUsers,
-    removeAll
+    removeAll,
+    getUserByName,
+    listAllUsers
 }
