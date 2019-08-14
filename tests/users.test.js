@@ -1,8 +1,8 @@
 const users = require('../src/users')
 
-const userDuplicate = 'test user 1'
-const userDelete = 'test user 2'
-var saveCurrentUsers = []
+const userDuplicate = 'testUser1UserTest'
+const userDelete = 'deleteUserUserTest'
+var saveCurrentUsers = users.loadUsers()
 
 
 beforeAll(() => {
@@ -37,7 +37,7 @@ test('Delete user', () => {
     const lenghtBefore = users.loadUsers().length
     users.removeUser(userDelete)
     const lenghtAfter = users.loadUsers().length
-    expect(lenghtAfter).toBe(lenghtBefore - 1)
+    expect(lenghtBefore).toBe(lenghtAfter + 1)
 })
 
 

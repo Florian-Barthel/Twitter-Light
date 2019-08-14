@@ -1,9 +1,9 @@
 const actions = require('../src/actions')
 const users = require('../src/users')
 
-const userOne = 'test user 1'
-const userTwo = 'test user 2'
-var saveCurrentUsers = []
+const userOne = 'testUser1ActionTest'
+const userTwo = 'testUser2ActionTest'
+var saveCurrentUsers = users.loadUsers()
 
 
 beforeAll(() => {
