@@ -82,20 +82,20 @@ const wall = (name) => {
  */
 const follow = (name, nameSubscribeTo) => {
     const allUsers = users.loadUsers()
-    const user = allUsers.find((user) => user.name.toLocaleLowerCase() === name.toLocaleLowerCase())
+    const myUser = allUsers.find((user) => user.name.toLocaleLowerCase() === name.toLocaleLowerCase())
     const userToFollow = allUsers.find((user) => user.name.toLocaleLowerCase() === nameSubscribeTo.toLocaleLowerCase())
-    const userAlreadyFollowing = user.following.find((followingName) => followingName.toLocaleLowerCase() === nameSubscribeTo.toLocaleLowerCase())
+    const userAlreadyFollowing = myUser.following.find((followingName) => followingName.toLocaleLowerCase() === nameSubscribeTo.toLocaleLowerCase())
 
-    if (!user) {
+    if (!myUser) {
         return errormessages.userNotFound(name)
     } else if (!userToFollow) {
         return errormessages.userNotFound(nameSubscribeTo)
     } else if (userAlreadyFollowing) {
-        return user.name + ' is already subscribed to ' + userToFollow.name + '\n'
+        return myUser.name + ' is already subscribed to ' + userToFollow.name + '\n'
     } else {
-        user.following.push(userToFollow.name)
+        myUser.following.push(userToFollow.name)
         users.saveUsers(allUsers)
-        return user.name + ' is now following ' + userToFollow.name + '.\n'
+        return myUser.name + ' is now following ' + userToFollow.name + '.\n'
     }
 }
 
