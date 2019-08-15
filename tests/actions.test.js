@@ -34,7 +34,7 @@ test('userOne follows userTwo', () => {
 })
 
 
-test('calculate and print time difference', () => {
+test('calculate time difference', () => {
     const seconds = actions.calcTimeDifference(Date.now() - 1000)
     expect(seconds).toBe(' (1 sec ago)')
 

@@ -1,6 +1,6 @@
 const fs = require('fs')
 const users = require('./users')
-const errormessages = require('./errormessages')
+const errorMessages = require('./errorMessages')
 
 
 /**
@@ -13,7 +13,7 @@ const post = (name, content) => {
     const user = allUsers.find((user) => user.name.toLowerCase() === name.toLowerCase() )
 
     if (!user) {
-        return errormessages.userNotFound(name)
+        return errorMessages.userNotFound(name)
     }
     user.posts.push({
         content,
@@ -34,7 +34,7 @@ const wall = (name) => {
     
     const user = users.getUserByName(name)
     if (!user) {
-        return errormessages.userNotFound(name)
+        return errorMessages.userNotFound(name)
     }
     
     //get all own posts from user (name)
@@ -87,9 +87,9 @@ const follow = (name, nameSubscribeTo) => {
     const userAlreadyFollowing = myUser.following.find((followingName) => followingName.toLocaleLowerCase() === nameSubscribeTo.toLocaleLowerCase())
 
     if (!myUser) {
-        return errormessages.userNotFound(name)
+        return errorMessages.userNotFound(name)
     } else if (!userToFollow) {
-        return errormessages.userNotFound(nameSubscribeTo)
+        return errorMessages.userNotFound(nameSubscribeTo)
     } else if (userAlreadyFollowing) {
         return myUser.name + ' is already subscribed to ' + userToFollow.name + '\n'
     } else {
@@ -108,7 +108,7 @@ const read = (name) => {
     const user = users.getUserByName(name)
 
     if (!user) { 
-        return errormessages.userNotFound(name)
+        return errorMessages.userNotFound(name)
     }
     
     var posts = user.posts

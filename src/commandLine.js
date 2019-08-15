@@ -5,7 +5,8 @@ const chalk = require('chalk')
 
 
 /**
- * Calls the functions in users and actions with input data
+ * Calls the functions in users / actions with input data
+ * and returns the output
  * @param {string} data 
  * @param {socket} socket 
  */
@@ -25,7 +26,7 @@ const handleCommand = (data, socket) => {
         } else if (tokens[0] === 'list') {
             return users.listAllUsers()
         } else {
-            //call read function when no other command fits
+            //command is a name
             return actions.read(tokens[0])
         }
     } 
@@ -57,7 +58,7 @@ const handleCommand = (data, socket) => {
         }
     }
 
-    //non of above
+    //no matching command was found
     return 'unrecognized command\n'
 }
 

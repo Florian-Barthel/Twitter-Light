@@ -1,5 +1,5 @@
 const fs = require('fs')
-const errormessages = require('./errormessages')
+const errorMessages = require('./errorMessages')
 
 
 /**
@@ -36,13 +36,13 @@ const removeUser = (name) => {
     //removes the user from the array
     const filteredUsers = users.filter((user) => user.name.toLowerCase() !== name.toLowerCase())
 
-    //removes the user from every follower array
+    //removes the user from every users following array
     filteredUsers.forEach((user) => {
         user.following = user.following.filter((followingName) => followingName.toLowerCase() !== name.toLowerCase())
     })
 
     if (users.length == filteredUsers.length) {
-        return errormessages.userNotFound(name)
+        return errorMessages.userNotFound(name)
     } else {
         saveUsers(filteredUsers)
         return 'User ' + name + ' was removed.\n'
@@ -93,6 +93,9 @@ const getUserByName = (name) => {
 }
 
 
+/**
+ * Returns a String with all users
+ */
 const listAllUsers = () => {
     const currentUsers = loadUsers()
     if (!currentUsers) {
