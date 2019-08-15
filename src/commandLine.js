@@ -12,47 +12,47 @@ const chalk = require('chalk')
  */
 const handleCommand = (data, socket) => {
     const command = cleanInput(data)
-    const unfilteredTokens = command.split(' ')
+    const unfilteredWords = command.split(' ')
     //remove all empty strings after split
-    const tokens = unfilteredTokens.filter((array) => array.length > 0)
-    const tokenCount = tokens.length
+    const words = unfilteredWords.filter((array) => array.length > 0)
+    const wordCount = words.length
 
     //Check for single word commands
-    if (tokenCount == 1) {
-        if (tokens[0] === 'exit') {
+    if (wordCount == 1) {
+        if (words[0] === 'exit') {
             socket.end('Closing connection\n')
-        } else if (tokens[0] === 'help') {
+        } else if (words[0] === 'help') {
             return printHelp()
-        } else if (tokens[0] === 'list') {
+        } else if (words[0] === 'list') {
             return users.listAllUsers()
         } else {
             //command is a name
-            return actions.read(tokens[0])
+            return actions.read(words[0])
         }
     } 
 
     //Check for post (token count unknown)
-    if (tokens[1] === '->') {
-        return actions.post(tokens[0], buildPost(tokens))
+    if (words[1] === '->') {
+        return actions.post(words[0], buildPost(words))
     }
 
     //Check for double word commands
-    if (tokenCount == 2) {
-        if (tokens[1] === 'wall') {
-            return actions.wall(tokens[0])
-        } else if (tokens[0] === 'create') {
-            return users.addUser(tokens[1])
-        } else if (tokens[0] === 'delete') {
-            return users.removeUser(tokens[1])
+    if (wordCount == 2) {
+        if (words[1] === 'wall') {
+            return actions.wall(words[0])
+        } else if (words[0] === 'create') {
+            return users.addUser(words[1])
+        } else if (words[0] === 'delete') {
+            return users.removeUser(words[1])
         } else {
             return 'unrecognized command\n'
         }
     }
     
     //Check for triple word commands
-    if (tokenCount == 3) {
-        if (tokens[1] == 'follows') {
-            return actions.follow(tokens[0], tokens[2])
+    if (wordCount == 3) {
+        if (words[1] == 'follows') {
+            return actions.follow(words[0], words[2])
         } else {
             return 'unrecognized command\n'
         }
@@ -77,12 +77,12 @@ const printHelp = () => {
 }
 
 
-//Reconstructs the post message from tokens
-const buildPost = (tokens) => {
-    tokens.shift()
-    tokens.shift()
+//Reconstructs the post message from words
+const buildPost = (words) => {
+    words.shift()
+    words.shift()
     post = ''
-    tokens.forEach(token => {
+    words.forEach(token => {
         post += token + ' '
     });
     return post
