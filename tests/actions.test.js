@@ -32,3 +32,18 @@ test('userOne follows userTwo', () => {
     const myUser = users.getUserByName(userOne)
     expect(myUser.following[0]).toBe(userTwo)
 })
+
+
+test('calculate and print time difference', () => {
+    const seconds = actions.calcTimeDifference(Date.now() - 1000)
+    expect(seconds).toBe(' (1 sec ago)')
+
+    const minutes = actions.calcTimeDifference(Date.now() - 1000 * 60)
+    expect(minutes).toBe(' (1 min ago)')
+
+    const hours = actions.calcTimeDifference(Date.now() - 1000 * 60 * 60)
+    expect(hours).toBe(' (1 h ago)')
+
+    const days = actions.calcTimeDifference(Date.now() - 1000 * 60 * 60 * 24)
+    expect(days).toBe(' (1 d ago)')
+})

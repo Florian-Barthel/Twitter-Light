@@ -17,7 +17,7 @@ const post = (name, content) => {
     }
     user.posts.push({
         content,
-        time: Math.floor(Date.now() / 1000)
+        time: Date.now()
     })
 
     users.saveUsers(allUsers)
@@ -129,7 +129,7 @@ const read = (name) => {
  * @param {number} time 
  */
 const calcTimeDifference = (time) => {
-    var difference = Math.floor(Date.now() / 1000) - time
+    var difference = Math.floor(Date.now() / 1000) - Math.floor(time / 1000)
     if (difference >= (60 * 60 * 24)) {
         difference = Math.floor(difference / (60 * 60 * 24))
         return ' (' + difference + ' d ago)'
@@ -148,5 +148,6 @@ module.exports = {
     post,
     wall,
     follow,
-    read
+    read,
+    calcTimeDifference
 }
