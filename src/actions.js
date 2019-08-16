@@ -21,7 +21,7 @@ const post = (name, content) => {
     })
 
     users.saveUsers(allUsers)
-    return user.name + ' has succesfully pushed to timeline.\n'
+    return user.name + ' has succesfully posted on the timeline.\n'
 }
 
 
@@ -68,7 +68,7 @@ const wall = (name) => {
     //print all posts in the correct order
     var result = '\nTimeline from ' + user.name + ':\n'
     allPosts.forEach((post) => {
-        result += post.author +' - ' + post.content + calcTimeDifference(post.time) + '\n'
+        result += '  ' + post.author +' - ' + post.content + calcTimeDifference(post.time) + '\n'
     });
     result += '\n'
     return result
@@ -112,14 +112,19 @@ const read = (name) => {
     }
     
     var posts = user.posts
+
+    if (posts.length == 0) {
+        return user.name + ' has no posts yet\n'
+    }
     //Sort post by time decreasing
     posts.sort((a, b) => {
         return b.time - a.time
     })
-    var result = 'All posts from ' + user.name + ':\n'
+    var result = '\nAll posts from ' + user.name + ':\n'
     posts.forEach((post) => {
-        result += user.name +' - ' + post.content + calcTimeDifference(post.time) + '\n'
+        result += '  ' + user.name +' - ' + post.content + calcTimeDifference(post.time) + '\n'
     });
+    result += '\n'
     return result
 }
 

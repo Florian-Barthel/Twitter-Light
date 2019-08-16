@@ -20,7 +20,7 @@ const handleCommand = (data, socket) => {
     //Check for single word commands
     if (wordCount == 1) {
         if (words[0] === 'exit') {
-            socket.end('Closing connection\n')
+            return 'closing connection\n'
         } else if (words[0] === 'help') {
             return printHelp()
         } else if (words[0] === 'list') {

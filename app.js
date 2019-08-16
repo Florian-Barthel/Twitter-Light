@@ -4,7 +4,11 @@ const commandLine = require('./src/commandLine')
 
 //handels the input from the command line
 const receiveData = (socket, data) => {
-    socket.write(commandLine.handleCommand(data, socket))
+    var answer = commandLine.handleCommand(data, socket)
+    socket.write(answer)
+    if (answer === 'closing connection\n') {
+        socket.end()
+    }
 }
 
 
