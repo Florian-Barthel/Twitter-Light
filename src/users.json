@@ -1,37 +1,12 @@
 [
   {
-    "name": "Florian",
+    "name": "testUser1UserTest",
     "following": [],
-    "posts": [
-      {
-        "content": "hallo ",
-        "time": 1565937762963
-      },
-      {
-        "content": "asdf ",
-        "time": 1565938919158
-      }
-    ]
-  },
-  {
-    "name": "Benni",
-    "following": [
-      "Florian"
-    ],
     "posts": []
   },
   {
-    "name": "b",
+    "name": "new user",
     "following": [],
-    "posts": [
-      {
-        "content": "1 ",
-        "time": 1565939718388
-      },
-      {
-        "content": "123 ",
-        "time": 1565940778396
-      }
-    ]
+    "posts": []
   }
 ]

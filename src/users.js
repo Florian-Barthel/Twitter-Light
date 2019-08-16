@@ -33,6 +33,9 @@ const addUser = (name) => {
 const removeUser = (name) => {
     const users = loadUsers()
 
+    //find user to get the name with the correct case
+    const user = getUserByName(name)
+
     //removes the user from the array
     const filteredUsers = users.filter((user) => user.name.toLowerCase() !== name.toLowerCase())
 
@@ -45,7 +48,7 @@ const removeUser = (name) => {
         return errorMessages.userNotFound(name)
     } else {
         saveUsers(filteredUsers)
-        return 'User ' + name + ' was removed.\n'
+        return 'User ' + user.name + ' was removed.\n'
     }
 }
 
