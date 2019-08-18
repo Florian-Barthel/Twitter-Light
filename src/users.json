@@ -1,7 +1,9 @@
 [
   {
     "name": "Florian",
-    "following": [],
+    "following": [
+      "Benni"
+    ],
     "posts": [
       {
         "content": "hallo ",
@@ -18,7 +20,12 @@
     "following": [
       "Florian"
     ],
-    "posts": []
+    "posts": [
+      {
+        "content": "adsag asjd kladg lasdg dsjal asdlgj asdlg asdjglas gdjlas jgdlasgd alsdg lsad glasdg jas ",
+        "time": 1566125826461
+      }
+    ]
   },
   {
     "name": "b",

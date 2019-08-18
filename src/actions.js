@@ -83,20 +83,25 @@ const wall = (name) => {
 const follow = (name, nameSubscribeTo) => {
     const allUsers = users.loadUsers()
     const myUser = allUsers.find((user) => user.name.toLocaleLowerCase() === name.toLocaleLowerCase())
-    const userToFollow = allUsers.find((user) => user.name.toLocaleLowerCase() === nameSubscribeTo.toLocaleLowerCase())
-    const userAlreadyFollowing = myUser.following.find((followingName) => followingName.toLocaleLowerCase() === nameSubscribeTo.toLocaleLowerCase())
-
+    const userToFollow = users.getUserByName(nameSubscribeTo)
+    
+    //Return an error when one of the users has not been created yet
     if (!myUser) {
         return errorMessages.userNotFound(name)
     } else if (!userToFollow) {
         return errorMessages.userNotFound(nameSubscribeTo)
-    } else if (userAlreadyFollowing) {
-        return myUser.name + ' is already subscribed to ' + userToFollow.name + '\n'
-    } else {
-        myUser.following.push(userToFollow.name)
-        users.saveUsers(allUsers)
-        return myUser.name + ' is now following ' + userToFollow.name + '.\n'
     }
+    
+    //Return a message when the user is already following
+    const userAlreadyFollowing = myUser.following.find((followingName) => followingName.toLocaleLowerCase() === nameSubscribeTo.toLocaleLowerCase())
+    if (userAlreadyFollowing) {
+        return myUser.name + ' is already following' + userToFollow.name + '\n'
+    }
+
+    //Follow the user and save it to the userlist
+    myUser.following.push(userToFollow.name)
+    users.saveUsers(allUsers)
+    return myUser.name + ' is now following ' + userToFollow.name + '.\n'
 }
 
 
