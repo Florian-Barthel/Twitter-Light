@@ -1,9 +1,7 @@
 [
   {
     "name": "Florian",
-    "following": [
-      "Benni"
-    ],
+    "following": [],
     "posts": [
       {
         "content": "hallo ",
@@ -12,14 +10,24 @@
       {
         "content": "asdf ",
         "time": 1565938919158
+      },
+      {
+        "content": "agsdasha ",
+        "time": 1566127768478
+      },
+      {
+        "content": "a ",
+        "time": 1566127787957
+      },
+      {
+        "content": "a ",
+        "time": 1566127791351
       }
     ]
   },
   {
     "name": "Benni",
-    "following": [
-      "Florian"
-    ],
+    "following": [],
     "posts": [
       {
         "content": "adsag asjd kladg lasdg dsjal asdlgj asdlg asdjglas gdjlas jgdlasgd alsdg lsad glasdg jas ",
@@ -29,7 +37,9 @@
   },
   {
     "name": "b",
-    "following": [],
+    "following": [
+      "Florian"
+    ],
     "posts": [
       {
         "content": "1 ",

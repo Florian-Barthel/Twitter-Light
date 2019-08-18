@@ -3,6 +3,8 @@ const users = require('../src/users')
 
 const userOne = 'testUser1ActionTest'
 const userTwo = 'testUser2ActionTest'
+const userOneFollow = 'testUser1FollowingTest'
+const userTwoFollow = 'testUser2FollowingTest'
 var saveCurrentUsers = users.loadUsers()
 
 
@@ -11,6 +13,9 @@ beforeAll(() => {
     users.removeAll()
     users.addUser(userOne)
     users.addUser(userTwo)
+    users.addUser(userOneFollow)
+    users.addUser(userTwoFollow)
+    actions.follow(userOneFollow, userTwoFollow)
 })
 
 
@@ -31,6 +36,16 @@ test('userOne follows userTwo', () => {
     actions.follow(userOne, userTwo)
     const myUser = users.getUserByName(userOne)
     expect(myUser.following[0]).toBe(userTwo)
+})
+
+
+test('userOneFollow unfollows userTwoFollow', () => {
+    var myUser = users.getUserByName(userOneFollow)
+    const lengthBefore = myUser.following.length
+    actions.unfollow(userOneFollow, userTwoFollow)
+    myUser = users.getUserByName(userOneFollow)
+    const lengthAfter = myUser.following.length
+    expect(lengthBefore).toBe(lengthAfter + 1)
 })
 
 

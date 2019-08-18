@@ -53,6 +53,8 @@ const handleCommand = (data, socket) => {
     if (wordCount == 3) {
         if (words[1] == 'follows') {
             return actions.follow(words[0], words[2])
+        } else if (words[1] == 'unfollows') {
+            return actions.unfollow(words[0], words[2])
         } else {
             return 'unrecognized command\n'
         }
@@ -71,6 +73,7 @@ const printHelp = () => {
     text += chalk.blue('posting:') + '\t(user) -> (message)\n'
     text += chalk.blue('reading:') + '\t(user)\n'
     text += chalk.blue('following:') + '\t(user) follows (another user)\n'
+    text += chalk.blue('unfollowing:') + '\t(user) unfollows (another user)\n'
     text += chalk.blue('wall:') + '\t\t(user) wall\n'
     text += chalk.blue('exit:') + '\t\texit\n'
     return text
