@@ -76,24 +76,25 @@ const wall = (name) => {
 
 
 /**
- * Adds the user (nameSubscribeTo) to the list following in user (name)
+ * Adds the user (nameToFollow) to the list following in user (name)
  * @param {string} name 
- * @param {string} nameSubscribeTo 
+ * @param {string} nameToFollow 
  */
-const follow = (name, nameSubscribeTo) => {
+const follow = (name, nameToFollow) => {
+    //Load and find both users
     const allUsers = users.loadUsers()
     const myUser = allUsers.find((user) => user.name.toLocaleLowerCase() === name.toLocaleLowerCase())
-    const userToFollow = users.getUserByName(nameSubscribeTo)
+    const userToFollow = users.getUserByName(nameToFollow)
     
-    //Return an error when one of the users has not been created yet
+    //Return an error when one of the users does not exist
     if (!myUser) {
         return errorMessages.userNotFound(name)
     } else if (!userToFollow) {
-        return errorMessages.userNotFound(nameSubscribeTo)
+        return errorMessages.userNotFound(nameToFollow)
     }
     
     //Return a message when the user is already following
-    const userAlreadyFollowing = myUser.following.find((followingName) => followingName.toLocaleLowerCase() === nameSubscribeTo.toLocaleLowerCase())
+    const userAlreadyFollowing = myUser.following.find((followingName) => followingName.toLocaleLowerCase() === nameToFollow.toLocaleLowerCase())
     if (userAlreadyFollowing) {
         return myUser.name + ' is already following' + userToFollow.name + '\n'
     }
@@ -101,7 +102,37 @@ const follow = (name, nameSubscribeTo) => {
     //Follow the user and save it to the userlist
     myUser.following.push(userToFollow.name)
     users.saveUsers(allUsers)
-    return myUser.name + ' is now following ' + userToFollow.name + '.\n'
+    return myUser.name + ' is now following ' + userToFollow.name + '\n'
+}
+
+/**
+ * Removes a user (nameToUnfollow) from the following array of user (name)
+ * @param {String} name 
+ * @param {String} nameToUnfollow 
+ */
+const unfollow = (name, nameToUnfollow)  => {
+    //Load and find both users
+    const allUsers = users.loadUsers()
+    const myUser = allUsers.find((user) => user.name.toLocaleLowerCase() === name.toLocaleLowerCase())
+    const userToUnfollow = users.getUserByName(nameToUnfollow)
+
+    //Return an error when one of the users does not exist
+    if (!myUser) {
+        return errorMessages.userNotFound(name)
+    } else if (!userToUnfollow) {
+        return errorMessages.userNotFound(nameToUnfollow)
+    }
+
+    //Return a message when the user is already not following the other user
+    const userAlreadyFollowing = myUser.following.find((followingName) => followingName.toLocaleLowerCase() === nameToUnfollow.toLocaleLowerCase())
+    if (!userAlreadyFollowing) {
+        return myUser.name + ' is already not following ' + userToUnfollow.name + '\n'
+    }
+
+    //Unfollow the user and save it to the userlist
+    myUser.following = myUser.following.filter((followingName) => followingName.toLowerCase() !== nameToUnfollow.toLowerCase())
+    users.saveUsers(allUsers)
+    return myUser.name + ' is no longer following ' + userToUnfollow.name + '\n'
 }
 
 
@@ -117,14 +148,15 @@ const read = (name) => {
     }
     
     var posts = user.posts
-
     if (posts.length == 0) {
         return user.name + ' has no posts yet\n'
     }
+
     //Sort post by time decreasing
     posts.sort((a, b) => {
         return b.time - a.time
     })
+
     var result = '\nAll posts from ' + user.name + ':\n'
     posts.forEach((post) => {
         result += '  ' + user.name +' - ' + post.content + calcTimeDifference(post.time) + '\n'
@@ -158,6 +190,7 @@ module.exports = {
     post,
     wall,
     follow,
+    unfollow,
     read,
     calcTimeDifference
 }

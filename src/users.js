@@ -41,12 +41,13 @@ const removeUser = (name) => {
         user.following = user.following.filter((followingName) => followingName.toLowerCase() !== name.toLowerCase())
     })
 
+    //No user was removed
     if (users.length == filteredUsers.length) {
         return errorMessages.userNotFound(name)
-    } else {
-        saveUsers(filteredUsers)
-        return 'User ' + name + ' was removed.\n'
     }
+
+    saveUsers(filteredUsers)
+    return 'User ' + name + ' was removed.\n'
 }
 
 
@@ -104,7 +105,7 @@ const listAllUsers = () => {
 
     var result = 'List of all users:\n'
     currentUsers.forEach((user) => {
-        result += user.name + '\n'
+        result += '  ' + user.name + '\n'
     })
     return result
 }
