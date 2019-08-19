@@ -1,4 +1,15 @@
 # Twitter-Light
+
+<h2>Commands</h2>
+<ul>
+  <li>Load node modules: <code>$ npm install</code></li>
+  <li>Run Tests: <code>$ npm test npm test --runInBand</code></li>
+  <li>Run Program (local): <code>$ node app.js</code></li>
+  <li>Build Program (docker): <code>$ docker build -t (username)/twitter-light .</code></li>
+  <li>Run Program (docker): <code>$ docker run -p 8888:8888 -d (username)/twitter-light</code></li>
+  <li>Connect to telnet: <code>$ telnet localhost 8888</code></li>
+</ul>
+
 <h2>Requirements</h2>
 <ul>
   <li>Application must use telnet server for input and output</li>
@@ -18,15 +29,4 @@
   <li>Implement requirements focusing on writing the best code you can produce
   <li>Use public git repository (e.g. GitHub) to commit your solution and provide us with
   the URL to the repository within the agreed time
-</ul>
-
-<h2>Commands</h2>
-<ul>
-  <li>Load node modules: <code>$ npm install</code></li>
-  <li>Run Tests (-i: runInBand): <code>$ npm test -i</code></li>
-  <li>Run Program (local): <code>$ node app.js</code></li>
-  <li>Build Program (docker): <code>$ docker build -t username/twitter-light .</code></li>
-  <li>Run Program (docker): <code>$ docker run -p 8888:8888 -d username/twitter-light</code></li>
-  <li>Show running docker: <code>$ docker ps -a</code></li>
-  <li>Connect to telnet: <code>$ telnet localhost 8888</code></li>
 </ul>

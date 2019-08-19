@@ -1,7 +1,5 @@
 const actions = require('./actions')
 const users = require('./users')
-const net = require('net')
-const chalk = require('chalk')
 
 
 /**
@@ -67,15 +65,15 @@ const handleCommand = (data, socket) => {
 
 const printHelp = () => {
     var text = ''
-    text += chalk.blue('list all users:') + '\tlist\n'
-    text += chalk.blue('create user:') + '\tcreate (user)\n'
-    text += chalk.blue('delete user:') +'\tdelete (user)\n'
-    text += chalk.blue('posting:') + '\t(user) -> (message)\n'
-    text += chalk.blue('reading:') + '\t(user)\n'
-    text += chalk.blue('following:') + '\t(user) follows (another user)\n'
-    text += chalk.blue('unfollowing:') + '\t(user) unfollows (another user)\n'
-    text += chalk.blue('wall:') + '\t\t(user) wall\n'
-    text += chalk.blue('exit:') + '\t\texit\n'
+    text += 'list all users:\tlist\n'
+    text += 'create user:\tcreate (user)\n'
+    text += 'delete user:\tdelete (user)\n'
+    text += 'posting:\t(user) -> (message)\n'
+    text += 'reading:\t(user)\n'
+    text += 'following:\t(user) follows (another user)\n'
+    text += 'unfollowing:\t(user) unfollows (another user)\n'
+    text += 'wall:\t\t(user) wall\n'
+    text += 'exit:\t\texit\n'
     return text
 }
 
@@ -99,7 +97,7 @@ const cleanInput = (data) => {
 
 
 const welcomeText = () => {
-    return chalk.green('Welcome to Twitter-Light\n') + 'Type help for a list of all commands\n'
+    return 'Welcome to Twitter-Light\nType help for a list of all commands\n'
 }
 
 

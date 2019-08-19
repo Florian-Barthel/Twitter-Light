@@ -1,53 +1,38 @@
 [
   {
-    "name": "Florian",
+    "name": "Alice",
     "following": [],
     "posts": [
       {
-        "content": "hallo ",
-        "time": 1565937762963
-      },
-      {
-        "content": "asdf ",
-        "time": 1565938919158
-      },
-      {
-        "content": "agsdasha ",
-        "time": 1566127768478
-      },
-      {
-        "content": "a ",
-        "time": 1566127787957
-      },
-      {
-        "content": "a ",
-        "time": 1566127791351
+        "content": "Amsterdam is so cool! ",
+        "time": 1566208867405
       }
     ]
   },
   {
-    "name": "Benni",
+    "name": "Bob",
     "following": [],
     "posts": [
       {
-        "content": "adsag asjd kladg lasdg dsjal asdlgj asdlg asdjglas gdjlas jgdlasgd alsdg lsad glasdg jas ",
-        "time": 1566125826461
+        "content": "What a wonderful weather! ",
+        "time": 1566208948572
+      },
+      {
+        "content": "Though a little bit too hot :) ",
+        "time": 1566208968188
       }
     ]
   },
   {
-    "name": "b",
+    "name": "Oscar",
     "following": [
-      "Florian"
+      "Alice",
+      "Bob"
     ],
     "posts": [
       {
-        "content": "1 ",
-        "time": 1565939718388
-      },
-      {
-        "content": "123 ",
-        "time": 1565940778396
+        "content": "Hey folks, what do you think about Go language? ",
+        "time": 1566209016961
       }
     ]
   }

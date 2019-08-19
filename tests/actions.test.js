@@ -19,12 +19,6 @@ beforeAll(() => {
 })
 
 
-afterAll(() => {
-    users.removeAll()
-    users.saveUsers(saveCurrentUsers)
-})
-
-
 test('make a post', () => {
     actions.post(userOne, 'post 1')
     const myUser = users.getUserByName(userOne)
@@ -61,4 +55,10 @@ test('calculate time difference', () => {
 
     const days = actions.calcTimeDifference(Date.now() - 1000 * 60 * 60 * 24)
     expect(days).toBe(' (1 d ago)')
+})
+
+
+afterAll(() => {
+    users.removeAll()
+    users.saveUsers(saveCurrentUsers)
 })

@@ -1,4 +1,3 @@
-const fs = require('fs')
 const users = require('./users')
 const errorMessages = require('./errorMessages')
 
@@ -81,6 +80,10 @@ const wall = (name) => {
  * @param {string} nameToFollow 
  */
 const follow = (name, nameToFollow) => {
+    if (name.toLowerCase() === nameToFollow.toLowerCase()) {
+         return 'You can\'t follow yourself\n'
+    }
+
     //Load and find both users
     const allUsers = users.loadUsers()
     const myUser = allUsers.find((user) => user.name.toLocaleLowerCase() === name.toLocaleLowerCase())
@@ -96,7 +99,7 @@ const follow = (name, nameToFollow) => {
     //Return a message when the user is already following
     const userAlreadyFollowing = myUser.following.find((followingName) => followingName.toLocaleLowerCase() === nameToFollow.toLocaleLowerCase())
     if (userAlreadyFollowing) {
-        return myUser.name + ' is already following' + userToFollow.name + '\n'
+        return myUser.name + ' is already following ' + userToFollow.name + '\n'
     }
 
     //Follow the user and save it to the userlist

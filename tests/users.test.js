@@ -13,12 +13,6 @@ beforeAll(() => {
 })
 
 
-afterAll(() => {
-    users.removeAll()
-    users.saveUsers(saveCurrentUsers)
-})
-
-
 test('Create user and save to json file', () => {
     users.addUser('new user')
     expect(users.getUserByName('new user')).toBeDefined()
@@ -49,7 +43,13 @@ test('Delete user that not exists', () => {
 })
 
 
-test('Create casesensitive user and find it without casesensitive', () => {
+test('getUserByName with different cases', () => {
     users.addUser('MyUser')
     expect(users.getUserByName('myuser')).toBeDefined()
+})
+
+
+afterAll(() => {
+    users.removeAll()
+    users.saveUsers(saveCurrentUsers)
 })
